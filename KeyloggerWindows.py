@@ -135,6 +135,7 @@ def mailInterval():
         # Enviar cada 2 horas aprox
         for x in range(720):    #720
             time.sleep(10)
+            print("Pasó 10 segunos")
         if VerificarConexion(): # Si hay conexión
             # Crea nombre del archivo
             nameFile = "log"+str(n)
