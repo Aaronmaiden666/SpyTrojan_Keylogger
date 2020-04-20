@@ -182,8 +182,3 @@ Los requisitos es tener instalada la librería `pyinstaller`, porfavor mire un t
 - [Facebook](https://www.facebook.com/SebastianEPH)
 - [Linkedin](https://www.linkedin.com/in/sebastianeph/)
 - [Telegram](https://t.me/sebastianeph)
-
-Código fuente basado en los desarrolladores: 
-
-    Ómar Þór Arnarsson & Viktor Þór Freysson  
-    otha3@hi.is & vthf1@hi.is`
