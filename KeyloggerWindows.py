@@ -132,6 +132,64 @@ def KeyConMin(argument):                # Caracteres Comunes // Optimizados
     }
     return switcher.get(argument, "")
 
+# Convierte tecla a un valor legible
+def KeyConMax(argument):                # Botones, comunes // Optimizados
+    switcher = {
+        "Key.space": " ",               # Espacio
+        "Key.backspace": "«",           # Borrar
+        "Key.enter": "\r\n",            # Salto de linea
+        "Key.tab": "    ",              # Tabulación
+        "Key.delete":" «×» ",           # Suprimir
+        # Números
+        "<96>": "0",                 # 0
+        "<97>": "1",                 # 1
+        "<98>": "2",                 # 2
+        "<99>": "3",                 # 3
+        "<100>": "4",                # 4
+        "<101>": "5",                # 5
+        "<102>": "6",                # 6
+        "<103>": "7",                # 7
+        "<104>": "8",                # 8
+        "<105>": "9",                # 9
+        # Números Númeral
+        "None<96>": "0",                 # 0
+        "None<97>": "1",                 # 1
+        "None<98>": "2",                 # 2
+        "None<99>": "3",                 # 3
+        "None<100>": "4",                # 4
+        "None<101>": "5",                # 5
+        "None<102>": "6",                # 6
+        "None<103>": "7",                # 7
+        "None<104>": "8",                # 8
+        "None<105>": "9",                # 9
+        # Teclas raras 2 
+        "['^']": "^",
+        "['`']": "`",                     #
+        "['¨']": "¨",                     #
+        "['´']": "´",                     #
+        "<110>": ".",                     #
+        "None<110>": ".",                 #
+        "Key.alt_l": " [Alt L] ",         #
+        "Key.alt_r": " [Alt R] ",
+        #"Key.shift_r": " [Shift R] ",
+        #"Key.shift": " [Shift L] ",
+        "Key.ctrl_r": " [Control R] ",    #
+        "Key.ctrl_l": " [Control L] ",    #
+        "Key.right" : " [Right] ",                 #
+        "Key.left"  : " [Left] ",                  #
+        "Key.up"    : " [Up]",                    #
+        "Key.down"  : " [Down] ",                  #
+        #"'\x16'"  : " [Pegó] ",
+        #"'\x18'"  : " [Cortar] ", 
+        #"'\x03'"  : " [Copiar] ", 
+        "Key.caps_lock"  : " [Mayus lock] ",  
+        #"Key.media_previous"    : " ♫ ",     #
+        #"Key.media_next"        : " ♫→ ",         #
+        #"Key.media_play_pause"  : " ■ ♫ ■ ",#
+        "Key.cmd"               : " [Windows] "          #
+    }
+    return switcher.get(argument, "")
+
 
 
 # Obtiene registro de teclas y guarda en un archivo log.txt
