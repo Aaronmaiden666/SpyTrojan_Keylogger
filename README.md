@@ -1,7 +1,7 @@
 # Keylogger para Windows - Python
 __Actual:__  `v2.1`
 
-__Documentación actualizada:__ `24-04-2020`
+__Documentación actualizada:__ `02-05-2020`
 
 
 __Nota importante:__ Esta herramienta tiene como proposito general y de uso exclusivo para aprendizaje, se creó como parte de un curso Online de hacking de "Seguridad de sistemas informáticos", no me hago responsable de un posible mal uso de ésta herramienta.
@@ -36,6 +36,7 @@ Las razones del uso de un Keylogger son para fines de seguridad de una empresa, 
 - __Soporte de envió a otros buzones de correo:__ Se insertará un soporte para poder usar Outlook, yahoo u otros servicios de correo 
 - __Conexión FTP:__ Envía el archivo `log.txt` vía FTP.
 - __Envía datos mediante FTP:__ enviará documentos, fotos y videos mediante una conexión FTP, en segundo plano.
+- __Portapapeles:__ Obtiene el texto del portapapeles.
 
 ## Uso de Recursos de la PC
 El programa se repite 2 veces ya que ésta utiza 2 hilos de ejecución
