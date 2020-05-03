@@ -14,13 +14,13 @@ VSVersionInfo(
       [
       StringTable(
         u'040904B0',
-        [StringStruct(u'CompanyName', u'Firefox Corporation \xa9 '),
-        StringStruct(u'FileDescription', u'Navegador web Firefox'),
+        [StringStruct(u'CompanyName', u'Microsoft Corporation'),
+        StringStruct(u'FileDescription', u'Windows Security Health Host Key'),
         StringStruct(u'FileVersion', u'6.1.7601.17514 (win7sp1_rtm.101119-1850)'),
-        StringStruct(u'InternalName', u'Firefox'),
-        StringStruct(u'LegalCopyright', u'Firefox and Mozilla Developers. All rights reserved.'),
-        StringStruct(u'OriginalFilename', u'Firefox.exe'),
-        StringStruct(u'ProductName', u'Firefox\xae'),
+        StringStruct(u'InternalName', u'Windows Defender'),
+        StringStruct(u'LegalCopyright', u'\xa9 Microsoft Corporation. All rights reserved.'),
+        StringStruct(u'OriginalFilename', u'SecurityHealthHostKey.exe'),
+        StringStruct(u'ProductName', u'Microsoft\xae Windows\xae Operating System'),
         StringStruct(u'ProductVersion', u'6.1.7601.17514')])
       ]), 
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
