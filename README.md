@@ -1,32 +1,44 @@
-# Keylogger para Windows - Python
-__Actual:__  `v2.1`
-
-__Documentación actualizada:__ `02-05-2020`
+````
+╔╗╔═╗      ╔╗               ╔╗╔╗╔╗     ╔╗
+║║║╔╝      ║║               ║║║║║║     ║║
+║╚╝╝╔══╦╗ ╔╣║╔══╦══╦══╦══╦═╗║║║║║╠╦═╗╔═╝╠══╦╗╔╗╔╦══╗
+║╔╗║║║═╣║ ║║║║╔╗║╔╗║╔╗║║═╣╔╝║╚╝╚╝╠╣╔╗╣╔╗║╔╗║╚╝╚╝║══╣
+║║║╚╣║═╣╚═╝║╚╣╚╝║╚╝║╚╝║║═╣║ ╚╗╔╗╔╣║║║║╚╝║╚╝╠╗╔╗╔╬══║
+╚╝╚═╩══╩═╗╔╩═╩══╩═╗╠═╗╠══╩╝  ╚╝╚╝╚╩╝╚╩══╩══╝╚╝╚╝╚══╝
+       ╔═╝║     ╔═╝╠═╝║
+       ╚══╝     ╚══╩══╝                     v3.1
+````
+__Documentación actualizada:__ `03-05-2020`
 
 
 __Nota importante:__ Esta herramienta tiene como proposito general y de uso exclusivo para aprendizaje, se creó como parte de un curso Online de hacking de "Seguridad de sistemas informáticos", no me hago responsable de un posible mal uso de ésta herramienta.
 
-Las razones del uso de un Keylogger son para fines de seguridad de una empresa, ya sea que estén viendo qué está haciendo el personal, cómo interactúan sus personas en las computadoras o que los atacantes intenten obtener información confidencial, como información de inicio de sesión u otros datos confidenciales. Este programa simplemente toma cada pulsación de tecla ingresada en el teclado y luego envía el archivo de registro por correo electrónico cada 2 horas.
+Las razones por las cuales existen los Keyloggers, tienen como fin la seguridad de una empresa ya sea que estén viendo qué está haciendo el personal, cómo interactúan sus personas en las computadoras o que los atacantes intenten obtener información confidencial, como información de inicio de sesión u otros datos confidenciales. Este programa simplemente toma cada pulsación de tecla ingresada en el teclado y luego envía el archivo de registro por correo electrónico cada 2 horas.
 
-## Carpeta Principal
+# Carpeta Principal
 ![Archivos](https://i.imgur.com/fvVMi8N.png)
 - `icon.ico`    = Icono Windows Defender
 - `KeyloggerWindows.py` = Código fuente del Keylogger
 - `LICENCE` = Licencia 
 - `README.md`= Documentación
+- `InfoKey.md` = Documentación: Recoleccion de registro de teclas.
 - `StartUp.reg` = Modifica el Registro de Windows
 - `version.txt` = Información detalla de conversión `.py` a `.exe`
 - `WindowsDefender.exe` = Keylogger Compilado 
 
-## Caracteristicas
-- __Envío por Gmail:__ Envía el registro de teclas por Gmail.
-- __Recibe datos por varios correos:__ Hay una posibilidad de agregar 1 o más correos, y así el registro de notas se envíe a varios correos a la vez,
+# Caracteristicas
+- __Indetectable Antivirus:__ Windows Defender `02/05/2020`, Avast, ESET NOD32
+- __Envío por Gmail:__ Envía el registro de teclas por Gmail en un `log.txt`.
+
+  ![df](https://i.imgur.com/rKeYzVx.png)
+
+- __Recibe datos por varios correos:__ Hay una posibilidad de agregar 1 o más correos, y así el registro de notas se envíe a varios correos a la vez.
 - __Verifica conexión a internet:__ El keylogger verifica si la computadora está conectada a internet, y si ese es el caso envía los datos, en caso contrario, no lo envía,
 - __Tiempo de envío personalizado:__ Usted puede elegir un intervalo de tiempo personalizado, en la cual desea que se envíe los archivos, `No se recomienta que sean muy seguidos, ya que el servidor de mensajería de google, bloqueará la cuenta por 1 día,  por eso el tiempo de intervalo de envío escogida es de 2 Horas, éstas horas se cuentan despues de iniciar el script`
-- __Obtención de datos a prueba de errores:__ En otros keylogger al momento de enviar el `log.txt`, éste proceso demora entre 3 a 5 segundos, y en ese transcurso de tiempo el keylogger no obtiene el registro de teclas, en éste keylogger, ese error está solucionado, obteniendo siempre los datos
+- __Obtención de datos a prueba de errores:__ En otros keylogger al momento de enviar el `log.txt`, éste proceso demora entre 3 a 5 segundos, y en ese transcurso de tiempo el keylogger no obtiene el registro de teclas, en éste keylogger, ese error está solucionado, obteniendo siempre los datos, verifique [aqui](InfoKey.md) la lista de teclas que obtiene 
 - __Segundo plano:__ Este keylogger, al ejecutarse en la linea de comando, sí mostrará una consola, solo por debuggeo, pero al ser convertida a `*.exe` se utilizara un comando para que ésta se ejecute en segundo plano.
 - __Disfraz:__ Al momento de ser convertido de `*.py a *.exe`. El Keylogger será disfrazado como `WindowsDefender.exe` con el ícono y la información del programa.
-- __Oculto:__ El Keylogger al iniciar se copia (Solo si ya está en un archivo *exe) a la carpeta `"C:\Users\Public\Security\Windows Defender"` , y en esa carpeta encuentras el archivo `log.txt`.
+- __Oculto:__ El Keylogger al iniciar se copia (Solo si ya está en un archivo *exe) a la carpeta `"C:\Users\Public\Security\Windows Defender\"` , y en esa carpeta encuentras el archivo `log.txt`.
 - __Iniciar automaticamente con el sistema:__ Se encuentra un archivo llamado `StartUp.reg`, la cual al ejecutarlo, ésta escribe el registro y permite que el keylogger se ejecute al iniciar sesión.
 - __Segundo Gmail en caso de Error:__ En casó el correo principal sea bloqueada o tenga x problemas, se usará un segundo correo.
 
@@ -72,6 +84,7 @@ Requerimiento de paquetes de `Python3`:
 
     # Correo o correos que recibirán el registro de datos `log.txt`
     receiver_email   = ["Recibe1@gmail.com", "Recibe2@hotmail.com", "Recibe3@yahoo.com"] # MultiCorreo
+
   # receiver_email   = ["correo@gmail.com"]  # SingleCorreo
 ````
 
@@ -88,7 +101,7 @@ Se utilizará `pyinstaller`
 
     Toda esa información puede ser modificada en el archivo de la plantilla `version.txt`
 2. __Disfraz _[Información]_:__ El el siguiente archivo `version.txt`, puedes modificar la información del `*.exe` la cual se supone que de ser creible.
-````t
+```` t
 VSVersionInfo(
   ffi=FixedFileInfo(
     filevers=(6, 1, 7601, 17514),
@@ -132,7 +145,7 @@ Los requisitos es tener instalada la librería `pyinstaller`, porfavor mire un t
 - El archivo llamado `WindowsDefender.exe` es el keylogger.
 - El archivo llamado , modifica el registro de windows, y hace que el keylogger se ejecute siempre al iniciar el usuario.
 
-## Procedimiento de infección:
+# Procedimiento de infección:
 - Usten guardará esos archivos en un USB
 - Es necesario desactivar el antivirus o agregar una exclusión en al siguiente ruta: `"C:\Users\Public\Security\Windows Defender"`
 - Lo siguiente es ejecutar el archivo `WindowsDefender.exe` en el USB, el keylogger se replicará en la siguiente ruta `"C:\Users\Public\Security\Windows Defender"`, Se recomienda no sacar el USB al instante ya que el keylogger se estará replicando enla ruta.
